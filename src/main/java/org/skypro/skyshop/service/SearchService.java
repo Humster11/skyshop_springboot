@@ -10,10 +10,11 @@ import java.util.UUID;
 
 @Service
 public class SearchService {
+    private final StorageService storageService;
 
 
-    public SearchService() {
-
+    public SearchService(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     public Collection<SearchResult> search(String searchQuery) {
@@ -21,8 +22,8 @@ public class SearchService {
         StorageService storage = new StorageService();
 
         List<SearchResult> searchableSet = storage.getAllSearchObject().stream()
-                .filter(element->element.getSearchTerm().contains(searchQuery))
-                .map(element->new SearchResult(UUID.randomUUID(),element.getSearchTerm(),element.getTypeContent()))
+                .filter(element -> element.getSearchTerm().contains(searchQuery))
+                .map(element -> new SearchResult(UUID.randomUUID(), element.getSearchTerm(), element.getTypeContent()))
                 .collect(Collectors.toList());
 
         return searchableSet;

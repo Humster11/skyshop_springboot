@@ -13,7 +13,6 @@ import java.util.*;
 public class StorageService {
     private final Map<UUID, Product> storageProduct = new HashMap<>();
     private final Map<UUID, Article> storageArticla = new HashMap<>();
-    private Set<Searchable> searchableArray = new HashSet<>();
 
     public StorageService(){
         fillingStorage();
@@ -51,6 +50,8 @@ public class StorageService {
     }
 
     public Collection<Searchable> getAllSearchObject(){
+
+        Set<Searchable> searchableArray = new HashSet<>();
 
         Iterator<Map.Entry<UUID, Product>> iteratorProduct = storageProduct.entrySet().iterator();
         while (iteratorProduct.hasNext()) {
