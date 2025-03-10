@@ -19,9 +19,8 @@ public class SearchService {
 
     public Collection<SearchResult> search(String searchQuery) {
 
-        StorageService storage = new StorageService();
 
-        List<SearchResult> searchableSet = storage.getAllSearchObject().stream()
+        List<SearchResult> searchableSet = storageService.getAllSearchObject().stream()
                 .filter(element -> element.getSearchTerm().contains(searchQuery))
                 .map(element -> new SearchResult(UUID.randomUUID(), element.getSearchTerm(), element.getTypeContent()))
                 .collect(Collectors.toList());
