@@ -6,7 +6,7 @@ class BasketItem {
      Product product;
      int count;
 
-     BasketItem(Product product, int count){
+     public BasketItem(Product product, int count){
           this.product = product;
           this.count = count;
      }
