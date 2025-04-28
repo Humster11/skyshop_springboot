@@ -1,8 +1,8 @@
 package org.skypro.skyshop.exception;
 
- class ShopError {
-    String code;
-    String message;
+ public class  ShopError {
+    private String code;
+    private String message;
 
     ShopError(){
         this.code = "404";
@@ -13,7 +13,4 @@ package org.skypro.skyshop.exception;
         return code+" "+message;
     }
 
-    /*public String getMessage(){
-        return message;
-    }*/
 }
