@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class ShopController {
@@ -66,5 +63,10 @@ public class ShopController {
    @GetMapping("/basketList")
     public Map<UUID, Integer> getBasketList(){
         return basketService.getList();
+   }
+
+   @GetMapping("/check/{id}")
+    public Optional<Product> checkProduct(@PathVariable("id") UUID id){
+       return storageService.getProductById(id);
    }
 }

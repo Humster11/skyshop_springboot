@@ -1,10 +1,12 @@
 package org.skypro.skyshop.service;
 
+import org.skypro.skyshop.exception.NoSuchProductException;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.product.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 
@@ -18,20 +20,20 @@ public class BasketService {
         this.storageService = storageService;
     }
 
-    public void addProduct(UUID id) {
+    public void addProduct(UUID id) throws NoSuchProductException {
         Optional<Product> isPresent = storageService.getProductById(id);
-        if (isPresent == null) {
-            throw new IllegalArgumentException("Продукта не существует");
+        if (isPresent.isEmpty()) {
+            throw new NoSuchProductException();
         } else {
             productBasket.addBasket(id);
         }
     }
 
-    public UserBasket getUserBasket() {
+    public UserBasket getUserBasket() throws NoSuchProductException {
 
         List<BasketItem> basketItems = productBasket.listBasket().entrySet().stream()
                 .map(element -> {
-                    Product product = storageService.getProductById(element.getKey()).orElseThrow();
+                    Product product = storageService.getProductById(element.getKey()).orElseThrow(NoSuchProductException::new);
                     return new BasketItem(product, element.getValue());
                 })
                 .collect(Collectors.toList());
