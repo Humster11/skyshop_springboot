@@ -18,6 +18,10 @@ public class StorageService {
         fillingStorage();
     }
 
+    public Map<UUID, Product> getStorageProduct() {
+        return storageProduct;
+    }
+
     private void fillingStorage(){
         SimpleProduct firstProduct = new SimpleProduct("чай", 100,UUID.randomUUID());
         FixPriceProduct secondProduct = new FixPriceProduct("банан",UUID.randomUUID());
@@ -73,5 +77,6 @@ public class StorageService {
     public Optional<Product> getProductById(UUID id) {
         return Optional.ofNullable(storageProduct.get(id));
     }
+
 
 }
