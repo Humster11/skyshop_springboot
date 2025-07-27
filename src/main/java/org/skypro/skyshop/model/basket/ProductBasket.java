@@ -10,6 +10,15 @@ import java.util.*;
 public class ProductBasket {
     private final Map<UUID, Integer> basketProduct = new HashMap<>();
 
+    public Map<UUID, Integer> getBasketProduct() {
+        if (basketProduct.isEmpty()){
+            return Collections.<UUID, Integer> emptyMap();
+        }
+        else {
+            return basketProduct;
+        }
+    }
+
     public void addBasket(UUID id){
         if (basketProduct.containsKey(id)){
             basketProduct.put(id,basketProduct.get(id)+1);
